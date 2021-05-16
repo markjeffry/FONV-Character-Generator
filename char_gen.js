@@ -1,3 +1,6 @@
+//FONV Character Generator
+//Written by: Mark De Leon
+
 const courier = {
     name: null,
     gender: null,
@@ -11,8 +14,7 @@ const courier = {
     TS1: null,
     TS2: null,
     TS3: null,
-    Trait1: null,
-    Trait2: null
+    Traits: []
 };
 
 const name_array = [
@@ -125,6 +127,8 @@ const assign_special = char_obj => {
     }
 }
 
+//Tags skills to the character
+//Cannot tag the same skill more than once
 const tag_skills = char_obj => {
     const skill1 = skill_array[Math.floor(Math.random()*skill_array.length)];
     let skill2;
@@ -143,10 +147,26 @@ const tag_skills = char_obj => {
     char_obj.TS3 = skill3;
 }
 
+//Trait Generator
+//Assigns 0, 1 or 2 traits to the character
+
+const assign_traits = char_obj => {
+    let number_of_traits = Math.floor(Math.random()*3);
+    let trait_ph;
+    while (number_of_traits>0) {
+        trait_ph = trait_array[Math.floor(Math.random()*trait_array.length)];
+        if (char_obj.Traits.indexOf(trait_ph) === -1) {
+            char_obj.Traits.push(trait_ph);
+        }
+        number_of_traits--;
+    }
+}
+
 courier.name = name_array[Math.floor(Math.random()*name_array.length)];
 courier.gender = gender_array[Math.floor(Math.random()*gender_array.length)];
 assign_special(courier);
 tag_skills(courier);
+assign_traits(courier);
 
 console.log(courier);
 
