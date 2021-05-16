@@ -125,9 +125,28 @@ const assign_special = char_obj => {
     }
 }
 
+const tag_skills = char_obj => {
+    const skill1 = skill_array[Math.floor(Math.random()*skill_array.length)];
+    let skill2;
+    let skill3;
+    
+    do {
+        skill2 = skill_array[Math.floor(Math.random()*skill_array.length)];
+    } while (skill1 === skill2);
+    
+    do {
+        skill3 = skill_array[Math.floor(Math.random()*skill_array.length)];
+    } while (skill2 === skill3);
+
+    char_obj.TS1 = skill1;
+    char_obj.TS2 = skill2;
+    char_obj.TS3 = skill3;
+}
+
 courier.name = name_array[Math.floor(Math.random()*name_array.length)];
 courier.gender = gender_array[Math.floor(Math.random()*gender_array.length)];
 assign_special(courier);
+tag_skills(courier);
 
 console.log(courier);
 
